@@ -5,25 +5,15 @@
   <body>
     <a href="market://details?id=com.oyo.consumer">Open Market</a>
     <hr />
-    <hr />
-    <hr />
-    <hr />
-    <hr />
-    <hr />
     <a href="oyorooms://">Open App</a>
     <script>
       window.onload = function () {
-        try {
-          window.location.href = "oyorooms://";
-        } catch (error) {
-          console.log(error);
-        }
+        window.location.href = "oyorooms://";
         setTimeout(function () {
-          window.location.href = "market://details?id=com.oyo.consumer";
+          window.location = "market://details?id=com.oyo.consumer";
           console.log("Vedansh");
-        }, 5000);
+        }, 1000);
       };
     </script>
   </body>
 </html>
-
