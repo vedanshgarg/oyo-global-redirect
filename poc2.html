@@ -3,16 +3,50 @@
     <title>Redirect</title>
   </head>
   <body>
-    <a href="market://details?id=com.oyo.consumer">Open Market</a>
+    <a href="market://details?id=com.oyo.consumer">Open Android Store</a>
+    <hr />
+    <hr />
+    <hr />
+    <a href="https://apps.apple.com/app/id988141624">Open IOS Store</a>
+    <hr />
+    <hr />
     <hr />
     <a href="oyorooms://">Open App</a>
     <script>
+      // Function to get the OS of the device to determine redirection url
+      function getMobileOperatingSystem() {
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+        // Windows Phone must come first because its UA also contains "Android"
+        if (/windows phone/i.test(userAgent)) {
+          return "windows_phone";
+        }
+
+        if (/android/i.test(userAgent)) {
+          return "android";
+        }
+
+        // iOS detection from: http://stackoverflow.com/a/9039885/177710
+        if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+          return "ios";
+        }
+
+        return "unknown";
+      }
+
+      // Main script to be executed on load of webpage
       window.onload = function () {
         window.location.href = "oyorooms://";
         setTimeout(function () {
-          window.location = "market://details?id=com.oyo.consumer";
-          console.log("Vedansh");
-        }, 500);
+          let os = getMobileOperatingSystem();
+          if (os == "android") {
+            window.location = "market://details?id=com.oyo.consumer";
+          }
+          if (os == "ios") {
+            window.location = "https://apps.apple.com/app/id988141624";
+          }
+          console.log(os);
+        }, 1000);
       };
     </script>
   </body>
