@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>Redirect</title>
+  </head>
+  <body>
+    <a href="market://details?id=com.oyo.consumer">Open Market</a>
+    <hr />
+    <a href="oyorooms://">Open App</a>
+    <iframe id="l" width="1" height="1" style="visibility: hidden"></iframe>
+    <script>
+      window.onload = function () {
+        // Deep link to your app goes here
+        document.getElementById("l").src = "oyorooms://";
+        setTimeout(function () {
+          window.location = "market://details?id=com.oyo.consumer";
+        }, 500);
+      };
+    </script>
+  </body>
+</html>
