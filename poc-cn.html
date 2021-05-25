@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <title>Redirect</title>
+  </head>
+  <body>
+    <a href="market://details?id=com.oyohotels.consumer">Open Market</a>
+    <hr />
+    <a href="oyorooms://">Open App</a>
+    <hr />
+    <img id="img-tag" />
+    <script>
+      // Function to get the OS of the device to determine redirection url
+      function getMobileOperatingSystem() {
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+        // Windows Phone must come first because its UA also contains "Android"
+        if (/windows phone/i.test(userAgent)) {
+          return "windows_phone";
+        }
+
+        if (/android/i.test(userAgent)) {
+          return "android";
+        }
+
+        // iOS detection from: http://stackoverflow.com/a/9039885/177710
+        if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+          return "ios";
+        }
+
+        return "unknown";
+      }
+
+      // Main script to be executed on load of webpage
+      window.onload = function () {
+        const address = new URL(window.location.href);
+        const code = address.searchParams.get("code");
+        console.log("INSTORE CODE =", code);
+
+        window.location.href = "oyorooms://";
+
+        const dfUrl =
+          "https://scan.oyohotels.top/fingerprint/create?code=" + code;
+
+        document.getElementById("img-tag").src = dfUrl;
+
+        setTimeout(function () {
+          let os = getMobileOperatingSystem();
+          if (os == "android") {
+            window.location = "market://details?id=com.oyohotels.consumer";
+          }
+          if (os == "ios") {
+            window.location = "https://apps.apple.com/cn/app/id1372626629";
+          }
+          window.location = "https://www.oyohotels.cn";
+          console.log(os);
+        }, 1000);
+      };
+    </script>
+  </body>
+</html>
