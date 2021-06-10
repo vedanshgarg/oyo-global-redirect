@@ -10,9 +10,13 @@
     <p id="width">Width</p>
     <script>
       window.onload = function () {
-        document.getElementById("height").innerHTML = screen.height;
-        document.getElementById("width").innerHTML = screen.width;
+        let ratio = window.devicePixelRatio || 1;
+        let w = screen.width * ratio;
+        let h = screen.height * ratio;
+        document.getElementById("height").innerHTML = h;
+        document.getElementById("width").innerHTML = w;
       };
     </script>
   </body>
 </html>
+
